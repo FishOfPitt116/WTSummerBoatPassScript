@@ -11,10 +11,16 @@ def sort_sheet_by_name():
 def get_account_index(currName):
     return sas.search(names, currName) + 1
 
+def account_found(accountIndex):
+    if accountIndex >= 2 and accountIndex <= len(names):
+        return True
+    else:
+        return False
+
 def print_account_information(accountIndex):
-    try:
+    if account_found(accountIndex):
         print(sh.row_values(accountIndex))
-    except:
+    else:
         print('Account not found.')
 
 def add_20_pass(accountIndex):
