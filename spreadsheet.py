@@ -41,3 +41,9 @@ def new_account(name):
     sh.update_cell(len(names)+1, 1, name)
     print('New account created under name', name)
     sort_sheet_by_name()
+    update_global_variables()
+
+def update_global_variables():
+    gc = gspread.service_account()
+    sh = gc.open("Test Boat Passes").sheet1
+    names = sh.col_values(1)
