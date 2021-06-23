@@ -49,8 +49,6 @@ def new_account(name):
     sh.update_cell(len(names)+1, 6, 0)
     sh.update_cell(len(names)+1, 8, today)
     print('New account created under name', name)
-    sort_sheet_by_name()
-    update_global_variables()
 
 def make_purchase(val, accountIndex):
     currentAmount = int(sh.cell(accountIndex, 6).value)
