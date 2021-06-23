@@ -49,11 +49,18 @@ def new_account(name):
     sh.update_cell(len(names)+1, 6, 0)
     sh.update_cell(len(names)+1, 8, today)
     print('New account created under name', name)
+    sort_sheet_by_name()
+    names.append(name)
+    names.sort()
 
 def make_purchase(val, accountIndex):
     currentAmount = int(sh.cell(accountIndex, 6).value)
-    newAmount = currentAmount + val
-    sh.update_cell(accountIndex, 6, newAmount)
+    if int(sh.cell(accountIndex, 7).value) - val > 0:
+        newAmount = currentAmount + val
+        sh.update_cell(accountIndex, 6, newAmount)
+        return True
+    else:
+        return False
 
 def update_global_variables():
     gc = gspread.service_account()

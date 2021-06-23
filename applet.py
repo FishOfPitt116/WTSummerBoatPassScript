@@ -4,25 +4,10 @@ import spreadsheet as s
 
 st.title('Winding Trails Boat Pass Applet')
 
-"""
-st.text('Select a button for function')
-newAccount = st.button('New Account')
-purchaseRequest = st.button('Submit Purchase Request')
-if newAccount:
-    newName = st.text_input('Account Name')
-if newName != '':
-    st.text(newName)
-    actIndex = s.get_account_index(newName)
-    if s.account_found(actIndex):
-        st.text('Account already found. Printing information...')
-    else:
-        s.new_account(newName)
-        st.text('Added new account.')
-"""
-
-newAccount = st.text_input('Account Name')
+st.header('Add New Pass')
+newAccount = st.text_input('New Account Name')
 passType = st.slider('New Pass Type', 20, 50, step=30)
-confirmAdd = st.button('SUBMIT')
+confirmAdd = st.button('ADD PASS')
 if confirmAdd:
     actIndex = s.get_account_index(newAccount)
     if not s.account_found(actIndex):
@@ -36,5 +21,17 @@ if confirmAdd:
             s.add_20_pass(actIndex)
         else:
             s.add_50_pass(actIndex)
-    s.sort_sheet_by_name()
-    s.update_global_variables()
+
+st.header('Submit Purchase Request')
+accountName = st.text_input('Account Name')
+price = int(st.number_input('Amount Charged'))
+confirmPurchase = st.button('CONFIRM PURCHASE')
+if confirmPurchase:
+    actIndex = s.get_account_index(accountName)
+    if s.account_found(actIndex):
+        if not s.make_purchase(price, actIndex):
+            st.text('Purchase failed: Not enough money in account.')
+        else:
+            st.text('Purchase successful.')
+    else:
+        st.text('Purchase failed: Account not found.')
