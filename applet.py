@@ -35,3 +35,18 @@ if confirmPurchase:
             st.text('Purchase successful.')
     else:
         st.text('Purchase failed: Account not found.')
+
+st.header('Account Lookup')
+accountForLookup = st.text_input('Account for Lookup')
+lookUp = st.button('LOOK UP')
+if lookUp:
+    actIndex = s.get_account_index(accountForLookup)
+    if s.account_found(actIndex):
+        txt = 'Account Name: ' + s.sh.cell(actIndex, 1).value
+        st.text(txt)
+        txt = 'Amount Remaining: $' + s.sh.cell(actIndex, 7).value
+        st.text(txt)
+        txt = 'Date added: ' + s.sh.cell(actIndex, 8).value
+        st.text(txt)
+    else:
+        st.text('Account not found.')
