@@ -4,6 +4,7 @@ import spreadsheet as s
 
 st.title('Winding Trails Boat Pass Applet')
 
+# Adding new boat pass (top of page)
 st.header('Add New Pass')
 newAccount = st.text_input('New Account Name')
 passType = st.slider('New Pass Type', 20, 50, step=30)
@@ -22,6 +23,7 @@ if confirmAdd:
         else:
             s.add_50_pass(actIndex)
 
+# Submitting a purchase request to the boat pass spreadsheet (middle of page)
 st.header('Submit Purchase Request')
 accountName = st.text_input('Account Name')
 price = int(st.number_input('Amount Charged'))
@@ -36,6 +38,7 @@ if confirmPurchase:
     else:
         st.text('Purchase failed: Account not found.')
 
+# Simply looks up account, prints details (bottom of page)
 st.header('Account Lookup')
 accountForLookup = st.text_input('Account for Lookup')
 lookUp = st.button('LOOK UP')
