@@ -2,7 +2,7 @@ import sys, gspread
 import searchandsort as sas
 from datetime import datetime
 
-gc = gspread.service_account() # Authentication works on my laptop only
+gc = gspread.service_account(filename='service_account.json') # Authentication works on my laptop only
 sh = gc.open("Test Boat Passes").sheet1 # Calls the spreadsheet named "Test Boat Passes" in drive
 names = sh.col_values(1) # List of all names in our system
 
